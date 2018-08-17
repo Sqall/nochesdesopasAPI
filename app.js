@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const heroesRoutes = require('./api/routes/heroes');
 const userRoutes = require('./api/routes/users');
 
-mongoose.connect('mongodb://jacksun:'+ process.env.MONGO_ATLAS_PW +'@cluster0-shard-00-00-qb15r.gcp.mongodb.net:27017,cluster0-shard-00-01-qb15r.gcp.mongodb.net:27017,cluster0-shard-00-02-qb15r.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',{useNewUrlParser: true})
+mongoose.connect('mongodb://jacksun:Fullmetala06!@cluster0-shard-00-00-qb15r.gcp.mongodb.net:27017,cluster0-shard-00-01-qb15r.gcp.mongodb.net:27017,cluster0-shard-00-02-qb15r.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',{useNewUrlParser: true})
 .then(console.log('Connected'))
 .catch(err => {console.log(err)});
 
