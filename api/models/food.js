@@ -89,7 +89,6 @@ module.exports.getFoodbyTransit = function(transit,callback){
 };
 
 
-intransit: Number
 module.exports.newComida = function(name,weight,price,cant,smax,smin,ssec,pllev,callback){
 
 	var query = new Comida({

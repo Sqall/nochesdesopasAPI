@@ -26,21 +26,19 @@ router.post('/',(req,res,next) => {
     console.log(req.body);
     
     const food = new Food({
-        name:req.body.name,
-		size: req.body.size,
-		quantity: req.body.quantity,
-		max: req.body.max,
-		min: req.body.min,
-		gender: req.body.gender,
-		age: req.body.age,
-		intransit: req.body.intransit
+        name: req.body.name,
+        size: req.body.size,
+        quantity: req.body.quantity,	
+        max: req.body.max,
+        min: req.body.min,
+        intransit: req.body.intransit
     });
 
     food.save()
         .then(result => {
             res.status(200).json({
-                message:'Cloth Created',
-                createdCloth: result//CAN CREATE NEW OBJECT TO RETURN
+                message:'Food Created',
+                createdFood: result//CAN CREATE NEW OBJECT TO RETURN
             });
         })
         .catch(err => {
