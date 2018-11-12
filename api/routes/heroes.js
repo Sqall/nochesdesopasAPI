@@ -10,7 +10,7 @@ const Hero = require('../models/heroe');
 router.get('/', HeroesController.heroes_get_all);
 
 //checkAuth revisa por json y bodyparser del App.js. Se puede cambiar de lugar en el encabezado REST
-router.post('/', checkAuth ,(req,res,next) => {
+router.post('/',(req,res,next) => {
     const hero = new Hero({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,

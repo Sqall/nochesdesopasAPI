@@ -7,8 +7,11 @@ const mongoose = require('mongoose');
 //DEFINED ROUTES TO THEIR FILES
 const heroesRoutes = require('./api/routes/heroes');
 const userRoutes = require('./api/routes/users');
+const clothRoutes = require('./api/routes/clothes');
+const foodRoutes = require('./api/routes/foods');
 
-mongoose.connect('mongodb://jacksun:Fullmetala06!@cluster0-shard-00-00-qb15r.gcp.mongodb.net:27017,cluster0-shard-00-01-qb15r.gcp.mongodb.net:27017,cluster0-shard-00-02-qb15r.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',{useNewUrlParser: true})
+// mongoose.connect('mongodb://jacksun:Fullmetala06!@cluster0-shard-00-00-qb15r.gcp.mongodb.net:27017,cluster0-shard-00-01-qb15r.gcp.mongodb.net:27017,cluster0-shard-00-02-qb15r.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',{useNewUrlParser: true})
+mongoose.connect('mongodb://angrydante:angrydan@ds125048.mlab.com:25048/angryiglesia',{useNewUrlParser: true})
 .then(console.log('Connected'))
 .catch(err => {console.log(err)});
 
@@ -30,9 +33,10 @@ app.use((req,res,next) => {
 
 
 //ROUTES REQUESTED
+app.use('/cloth',clothRoutes);
+app.use('/food',foodRoutes);
 app.use('/heroes',heroesRoutes);
 app.use('/user',userRoutes);
-
 
 app.use((req,res,next) => {
     const error = new Error('Not Found');
