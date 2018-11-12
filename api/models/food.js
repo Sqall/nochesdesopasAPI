@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcryptjs');
 
 var FoodSchema = mongoose.Schema({
 	id:{
