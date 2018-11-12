@@ -23,6 +23,7 @@ router.get('/',(req,res,next) => {
 });
 
 router.post('/',(req,res,next) => {
+    console.log(req.body);
     
     const food = new Food({
         name:req.body.name,
@@ -32,11 +33,11 @@ router.post('/',(req,res,next) => {
 		min: req.body.min,
 		gender: req.body.gender,
 		age: req.body.age,
-		intransit: req.body.transit
+		intransit: req.body.intransit
     });
+
     food.save()
         .then(result => {
-            console.log(result);
             res.status(200).json({
                 message:'Cloth Created',
                 createdCloth: result//CAN CREATE NEW OBJECT TO RETURN
@@ -46,7 +47,6 @@ router.post('/',(req,res,next) => {
             res.status(500).json({
                 error: err
             });
-            console.log(err);
         });
 });
 

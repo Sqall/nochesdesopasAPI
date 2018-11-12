@@ -32,7 +32,7 @@ router.post('/',(req,res,next) => {
 		min: req.body.min,
 		gender: req.body.gender,
 		age: req.body.age,
-		intransit: req.body.transit
+		intransit: req.body.intransit
     });
     cloth.save()
         .then(result => {
