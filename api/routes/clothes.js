@@ -53,7 +53,7 @@ router.get('/byId/:id',(req,res,next) => {
 });
 
 router.get('/bySize/:size',(req,res,next) => {
-    Cloth.find({'itemSize':req.params.size})
+    Cloth.find({'itemSize':req.params.itemSize})
         .exec()
         .then(doc => {
             if (doc){
@@ -68,7 +68,7 @@ router.get('/bySize/:size',(req,res,next) => {
 });
 
 router.get('/byGender/:gender',(req,res,next) => {
-    Cloth.find({'itemGender':req.params.gender})
+    Cloth.find({'itemGender':req.params.itemGender})
         .exec()
         .then(doc => {
             if (doc){
@@ -83,7 +83,7 @@ router.get('/byGender/:gender',(req,res,next) => {
 });
 
 router.get('/byQuantity/:quantity',(req,res,next) => {
-    const filter = parseInt(req.params.quantity);
+    const filter = parseInt(req.params.itemQuantity);
     Cloth.find({'itemQuantity': filter })
         .exec()
         .then(doc => {
@@ -99,7 +99,7 @@ router.get('/byQuantity/:quantity',(req,res,next) => {
 });
 
 router.get('/byMax/:max',(req,res,next) => {
-    const filter = parseInt(req.params.max);
+    const filter = parseInt(req.params.itemMax);
     Cloth.find({'itemMax': filter })
         .exec()
         .then(doc => {
@@ -115,7 +115,7 @@ router.get('/byMax/:max',(req,res,next) => {
 });
 
 router.get('/byMin/:min',(req,res,next) => {
-    const filter = parseInt(req.params.min);
+    const filter = parseInt(req.params.itemMin);
     Cloth.find({'itemMin': filter})
         .exec()
         .then(doc => {
@@ -169,13 +169,14 @@ router.get('/byMoreThan/:nro',(req,res,next) => {
 router.post('/',(req,res,next) => {
     
     const newCloth = new Cloth({
-        itemName: req.body.name,
-		itemSize: req.body.size,
-		itemQuantity: req.body.quantity,
-		itemMax: req.body.max,
-		itemMin: req.body.min,
-		itemGender: req.body.gender
+        itemName: req.body.itemName,
+		itemSize: req.body.itemSize,
+		itemQuantity: req.body.itemQuantity,
+		itemMax: req.body.itemMax,
+		itemMin: req.body.itemMin,
+		itemGender: req.body.itemGender
     });
+
     newCloth.save()
         .then(result => {
             res.status(200).json({
@@ -189,7 +190,6 @@ router.post('/',(req,res,next) => {
             });
         });
 });
-
 
 //---------------- UPDATE
 
@@ -224,6 +224,21 @@ router.put('/id/:id',(req,res,next) => {
         .catch(err => {
             res.status(500).json({error:err});
         });
+});
+
+router.delete('/id/:id', (req,res,next) => {
+    Cloth.findOneAndDelete({'_id': req.params.id})
+    .exec()
+        .then(response => {
+            if (response){
+                res.status(200).json({message:'Ropa Eliminada'});
+            } else{
+                res.status(404).json({message: 'No existe en el ropero'});
+            }
+        })
+        .catch(err => {
+            res.status(500).json({error:err});
+        });;
 });
 
 module.exports = router;
