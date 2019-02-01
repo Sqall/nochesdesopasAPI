@@ -168,7 +168,7 @@ router.get('/byMoreThan/:nro',(req,res,next) => {
 
 router.post('/',(req,res,next) => {
     
-    const cloth = new Cloth({
+    const newCloth = new Cloth({
         itemName: req.body.name,
 		itemSize: req.body.size,
 		itemQuantity: req.body.quantity,
@@ -176,7 +176,7 @@ router.post('/',(req,res,next) => {
 		itemMin: req.body.min,
 		itemGender: req.body.gender
     });
-    cloth.save()
+    newCloth.save()
         .then(result => {
             res.status(200).json({
                 message:'Cloth Created',
@@ -187,6 +187,42 @@ router.post('/',(req,res,next) => {
             res.status(500).json({
                 error: err
             });
+        });
+});
+
+
+//---------------- UPDATE
+
+router.put('/id/:id',(req,res,next) => {
+    
+    const newitemName = req.body.name;
+    const newitemSize = req.body.size;
+    const newitemQuantity = req.body.quantity;
+    const newitemMax = req.body.max;
+    const newitemMin = req.body.min;
+    const newitemGender = req.body.gender;
+
+    Cloth.findOneAndUpdate({'_id':req.params.id},{$set: {
+            itemName: newitemName,
+            itemSize: newitemSize,
+            itemQuantity: newitemQuantity,
+            itemMax: newitemMax,
+            itemMin: newitemMin,
+            itemGender: newitemGender
+        }})
+        .exec()
+        .then(doc => {
+            if (doc){
+                res.status(200).json({
+                    message:'Ropa modificada',
+                    createdCloth: doc
+                });
+            } else{
+                res.status(404).json({message: 'No existe en el ropero'});
+            }
+        })
+        .catch(err => {
+            res.status(500).json({error:err});
         });
 });
 
