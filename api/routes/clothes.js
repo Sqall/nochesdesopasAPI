@@ -195,12 +195,12 @@ router.post('/',(req,res,next) => {
 
 router.put('/id/:id',(req,res,next) => {
     
-    const newitemName = req.body.name;
-    const newitemSize = req.body.size;
-    const newitemQuantity = req.body.quantity;
-    const newitemMax = req.body.max;
-    const newitemMin = req.body.min;
-    const newitemGender = req.body.gender;
+    const newitemName = req.body.itemName;
+    const newitemSize = req.body.itemSize;
+    const newitemQuantity = req.body.itemQuantity;
+    const newitemMax = req.body.itemMax;
+    const newitemMin = req.body.itemMin;
+    const newitemGender = req.body.itemGender;
 
     Cloth.findOneAndUpdate({'_id':req.params.id},{$set: {
             itemName: newitemName,
