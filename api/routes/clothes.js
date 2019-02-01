@@ -38,7 +38,7 @@ router.get('/byName/:name',(req,res,next) => {
 });
 
 router.get('/byId/:id',(req,res,next) => {
-    Cloth.find({'_id':req.params.id})
+    Cloth.findOne({'_id':req.params.id})
         .exec()
         .then(doc => {
             if (doc){
