@@ -38,7 +38,7 @@ router.get('/byId/:id',(req,res,next) => {
 });
 
 router.get('/byName/:name',(req,res,next) => {
-    Food.find({'name': req.params.name})
+    Food.find({'itemName': req.params.name})
         .exec()
         .then(doc => {
             if (doc){
@@ -54,7 +54,7 @@ router.get('/byName/:name',(req,res,next) => {
 
 router.get('/bySize/:size',(req,res,next) => {
     const filter = parseInt(req.params.size);
-    Food.find({'size': filter})
+    Food.find({'itemSize': filter})
         .exec()
         .then(doc => {
             if (doc){
@@ -70,7 +70,7 @@ router.get('/bySize/:size',(req,res,next) => {
 
 router.get('/byQuantity/:quantity',(req,res,next) => {
     const filter = parseInt(req.params.quantity);
-    Food.find({'quantity': filter})
+    Food.find({'itemQuantity': filter})
         .exec()
         .then(doc => {
             if (doc){
@@ -86,7 +86,7 @@ router.get('/byQuantity/:quantity',(req,res,next) => {
 
 router.get('/byMax/:max',(req,res,next) => {
     const filter = parseInt(req.params.max);
-    Food.find({'max': filter})
+    Food.find({'itemMax': filter})
         .exec()
         .then(doc => {
             if (doc){
@@ -102,7 +102,7 @@ router.get('/byMax/:max',(req,res,next) => {
 
 router.get('/byMin/:min',(req,res,next) => {
     const filter = parseInt(req.params.min);
-    Food.find({'min': filter})
+    Food.find({'itemMin': filter})
         .exec()
         .then(doc => {
             if (doc){
@@ -118,7 +118,7 @@ router.get('/byMin/:min',(req,res,next) => {
 
 router.get('/byLessThan/:nro',(req,res,next) => {
     const filter = parseInt(req.params.nro);    
-    Food.find({'quantity': {$lte: filter }})
+    Food.find({'itemQuantity': {$lte: filter }})
         .exec()
         .then(doc => {
             if (doc){
@@ -134,7 +134,7 @@ router.get('/byLessThan/:nro',(req,res,next) => {
 
 router.get('/byMoreThan/:nro',(req,res,next) => {
     const filter = parseInt(req.params.nro);
-    Food.find({'quantity': {$gte: filter }})
+    Food.find({'itemQuantity': {$gte: filter }})
         .exec()
         .then(doc => {
             if (doc){
@@ -153,11 +153,11 @@ router.post('/',(req,res,next) => {
     console.log(req.body);
     
     const food = new Food({
-        name: req.body.name,
-        size: req.body.size,
-        quantity: req.body.quantity,	
-        max: req.body.max,
-        min: req.body.min
+        itemName: req.body.name,
+        itemSize: req.body.size,
+        itemQuantity: req.body.quantity,	
+        itemMax: req.body.max,
+        itemMin: req.body.min
     });
 
     food.save()

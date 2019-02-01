@@ -23,7 +23,7 @@ router.get('/',(req,res,next) => {
 });
 
 router.get('/byName/:name',(req,res,next) => {
-    Cloth.find({'name':req.params.name})
+    Cloth.find({'itemName':req.params.name})
         .exec()
         .then(doc => {
             if (doc){
@@ -53,7 +53,7 @@ router.get('/byId/:id',(req,res,next) => {
 });
 
 router.get('/bySize/:size',(req,res,next) => {
-    Cloth.find({'size':req.params.size})
+    Cloth.find({'itemSize':req.params.size})
         .exec()
         .then(doc => {
             if (doc){
@@ -68,7 +68,7 @@ router.get('/bySize/:size',(req,res,next) => {
 });
 
 router.get('/byGender/:gender',(req,res,next) => {
-    Cloth.find({'gender':req.params.gender})
+    Cloth.find({'itemGender':req.params.gender})
         .exec()
         .then(doc => {
             if (doc){
@@ -84,7 +84,7 @@ router.get('/byGender/:gender',(req,res,next) => {
 
 router.get('/byQuantity/:quantity',(req,res,next) => {
     const filter = parseInt(req.params.quantity);
-    Cloth.find({'quantity': filter })
+    Cloth.find({'itemQuantity': filter })
         .exec()
         .then(doc => {
             if (doc){
@@ -100,7 +100,7 @@ router.get('/byQuantity/:quantity',(req,res,next) => {
 
 router.get('/byMax/:max',(req,res,next) => {
     const filter = parseInt(req.params.max);
-    Cloth.find({'max': filter })
+    Cloth.find({'itemMax': filter })
         .exec()
         .then(doc => {
             if (doc){
@@ -116,7 +116,7 @@ router.get('/byMax/:max',(req,res,next) => {
 
 router.get('/byMin/:min',(req,res,next) => {
     const filter = parseInt(req.params.min);
-    Cloth.find({'min': filter})
+    Cloth.find({'itemMin': filter})
         .exec()
         .then(doc => {
             if (doc){
@@ -132,7 +132,7 @@ router.get('/byMin/:min',(req,res,next) => {
 
 router.get('/byLessThan/:nro',(req,res,next) => {
     const filter = parseInt(req.params.nro);
-    Cloth.find({'quantity': {$lt: filter }})
+    Cloth.find({'itemQuantity': {$lt: filter }})
         .exec()
         .then(doc => {
             if (doc){
@@ -148,7 +148,7 @@ router.get('/byLessThan/:nro',(req,res,next) => {
 
 router.get('/byMoreThan/:nro',(req,res,next) => {
     const filter = parseInt(req.params.nro);
-    Cloth.find({'quantity': {$gte: filter }})
+    Cloth.find({'itemQuantity': {$gte: filter }})
         .exec()
         .then(doc => {
             if (doc){
@@ -169,16 +169,15 @@ router.get('/byMoreThan/:nro',(req,res,next) => {
 router.post('/',(req,res,next) => {
     
     const cloth = new Cloth({
-        name:req.body.name,
-		size: req.body.size,
-		quantity: req.body.quantity,
-		max: req.body.max,
-		min: req.body.min,
-		gender: req.body.gender
+        itemName: req.body.name,
+		itemSize: req.body.size,
+		itemQuantity: req.body.quantity,
+		itemMax: req.body.max,
+		itemMin: req.body.min,
+		itemGender: req.body.gender
     });
     cloth.save()
         .then(result => {
-            console.log(result);
             res.status(200).json({
                 message:'Cloth Created',
                 createdCloth: result//CAN CREATE NEW OBJECT TO RETURN
@@ -188,7 +187,6 @@ router.post('/',(req,res,next) => {
             res.status(500).json({
                 error: err
             });
-            console.log(err);
         });
 });
 

@@ -5,11 +5,11 @@ var FoodSchema = mongoose.Schema({
 		type: Number,
 		index:true
 	},
-	name: String,
-	size: Number,
-	quantity: Number,	
-	max: Number,
-	min: Number
+	itemName: String,
+	itemSize: Number,
+	itemQuantity: Number,	
+	itemMax: Number,
+	itemMin: Number
 });
 
 module.exports = mongoose.model('Food',FoodSchema);

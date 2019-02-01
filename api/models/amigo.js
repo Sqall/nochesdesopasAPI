@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
 
-
-//-------------------------------- GET
 const AmigoSchema = mongoose.Schema({
 	id:{
 		type: Number,
