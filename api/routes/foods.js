@@ -38,7 +38,7 @@ router.get('/byId/:id',(req,res,next) => {
 });
 
 router.get('/byName/:name',(req,res,next) => {
-    Food.find({'itemName': req.params.name})
+    Food.find({'itemName': req.params.itemName})
         .exec()
         .then(doc => {
             if (doc){
@@ -53,7 +53,7 @@ router.get('/byName/:name',(req,res,next) => {
 });
 
 router.get('/bySize/:size',(req,res,next) => {
-    const filter = parseInt(req.params.size);
+    const filter = parseInt(req.params.itemSize);
     Food.find({'itemSize': filter})
         .exec()
         .then(doc => {
@@ -69,7 +69,7 @@ router.get('/bySize/:size',(req,res,next) => {
 });
 
 router.get('/byQuantity/:quantity',(req,res,next) => {
-    const filter = parseInt(req.params.quantity);
+    const filter = parseInt(req.params.itemQuantity);
     Food.find({'itemQuantity': filter})
         .exec()
         .then(doc => {
@@ -85,7 +85,7 @@ router.get('/byQuantity/:quantity',(req,res,next) => {
 });
 
 router.get('/byMax/:max',(req,res,next) => {
-    const filter = parseInt(req.params.max);
+    const filter = parseInt(req.params.itemMax);
     Food.find({'itemMax': filter})
         .exec()
         .then(doc => {
@@ -101,7 +101,7 @@ router.get('/byMax/:max',(req,res,next) => {
 });
 
 router.get('/byMin/:min',(req,res,next) => {
-    const filter = parseInt(req.params.min);
+    const filter = parseInt(req.params.itemMin);
     Food.find({'itemMin': filter})
         .exec()
         .then(doc => {
@@ -153,11 +153,11 @@ router.post('/',(req,res,next) => {
     console.log(req.body);
     
     const food = new Food({
-        itemName: req.body.name,
-        itemSize: req.body.size,
-        itemQuantity: req.body.quantity,	
-        itemMax: req.body.max,
-        itemMin: req.body.min
+        itemName: req.body.itemName,
+        itemSize: req.body.itemSize,
+        itemQuantity: req.body.itemQuantity,	
+        itemMax: req.body.itemMax,
+        itemMin: req.body.itemMin
     });
 
     food.save()
@@ -173,5 +173,54 @@ router.post('/',(req,res,next) => {
             });
         });
 });
+
+//---------------- UPDATE
+
+router.put('/id/:id',(req,res,next) => {
+    
+    const newitemName = req.body.itemName;
+    const newitemSize = req.body.itemSize;
+    const newitemQuantity = req.body.itemQuantity;
+    const newitemMax = req.body.itemMax;
+    const newitemMin = req.body.itemMin;
+
+    Food.findOneAndUpdate({'_id':req.params.id},{$set: {
+            itemName: newitemName,
+            itemSize: newitemSize,
+            itemQuantity: newitemQuantity,
+            itemMax: newitemMax,
+            itemMin: newitemMin
+        }})
+        .exec()
+        .then(doc => {
+            if (doc){
+                res.status(200).json({
+                    message:'Comida modificada',
+                    createdFood: doc
+                });
+            } else{
+                res.status(404).json({message: 'No existe la comida'});
+            }
+        })
+        .catch(err => {
+            res.status(500).json({error:err});
+        });
+});
+
+router.delete('/id/:id', (req,res,next) => {
+    Food.findOneAndDelete({'_id': req.params.id})
+    .exec()
+        .then(response => {
+            if (response){
+                res.status(200).json({message:'Comida Eliminada'});
+            } else{
+                res.status(404).json({message: 'No existe la comida'});
+            }
+        })
+        .catch(err => {
+            res.status(500).json({error:err});
+        });;
+});
+
 
 module.exports = router;
