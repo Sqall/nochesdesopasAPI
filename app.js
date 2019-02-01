@@ -19,7 +19,7 @@ mongoose.connect('mongodb://angrydante:angrydan@ds125048.mlab.com:25048/angryigl
 
 mongoose.Promise = global.Promise;
 //MIDDLEWARES
-app.use(cors())
+app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
