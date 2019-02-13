@@ -40,7 +40,7 @@ router.get('/names',(req,res,next) => {
 router.post('/',(req,res,next) => {
     const newZone = new Zone({
         itemName: req.body.itemName,
-        itemFriends: req.body.Friends
+        itemFriends: req.body.itemFriends
     });
 
     newZone.save()
