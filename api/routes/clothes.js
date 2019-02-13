@@ -3,8 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 //------ Controllers
-// const HeroesController = require ('../controllers/cloth');
-
+//
 const Cloth = require('../models/cloth');
 
 router.get('/',(req,res,next) => {

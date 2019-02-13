@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors')
+const cors = require('cors');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -11,6 +11,7 @@ const userRoutes = require('./api/routes/users');
 const clothRoutes = require('./api/routes/clothes');
 const foodRoutes = require('./api/routes/foods');
 const transitRoutes = require('./api/routes/intransit');
+const zoneRoutes = require('./api/routes/zones');
 
 // mongoose.connect('mongodb://jacksun:Fullmetala06!@cluster0-shard-00-00-qb15r.gcp.mongodb.net:27017,cluster0-shard-00-01-qb15r.gcp.mongodb.net:27017,cluster0-shard-00-02-qb15r.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',{useNewUrlParser: true})
 mongoose.connect('mongodb://angrydante:angrydan@ds125048.mlab.com:25048/angryiglesia',{useNewUrlParser: true})
@@ -41,6 +42,7 @@ app.use('/food',foodRoutes);
 app.use('/heroes',heroesRoutes);
 app.use('/user',userRoutes);
 app.use('/intransit',transitRoutes);
+app.use('/zone',zoneRoutes);
 
 app.use((req,res,next) => {
     const error = new Error('Not Found');
