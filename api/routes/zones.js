@@ -38,9 +38,10 @@ router.get('/names',(req,res,next) => {
 //POSTS
 
 router.post('/',(req,res,next) => {
+
     const newZone = new Zone({
         itemName: req.body.itemName,
-        itemFriends: req.body.itemFriends
+        itemFriends: JSON.parse(req.body.itemFriends)
     });
 
     newZone.save()
@@ -56,6 +57,21 @@ router.post('/',(req,res,next) => {
             });
         });
 });
+
+router.delete('/name/:name', (req,res,next) => {
+
+    Zone.findOneAndDelete({'itemName': req.params.name})
+        .then(result => {
+            res.status(200).json({
+                message:'Zone Deleted'
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+})
 
 
 module.exports = router;
