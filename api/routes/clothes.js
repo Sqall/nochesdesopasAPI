@@ -225,6 +225,8 @@ router.put('/id/:id',(req,res,next) => {
         });
 });
 
+
+//--------------- DELETE
 router.delete('/id/:id', (req,res,next) => {
     Cloth.findOneAndDelete({'_id': req.params.id})
     .exec()

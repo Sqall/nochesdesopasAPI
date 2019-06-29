@@ -35,7 +35,7 @@ router.get('/names',(req,res,next) => {
         });
 });
 
-//POSTS
+// ---------------- POSTS
 
 router.post('/',(req,res,next) => {
 
@@ -58,6 +58,24 @@ router.post('/',(req,res,next) => {
         });
 });
 
+// ---------------- MODIFY
+router.put('/:zone', (req,res,next) => {
+    Zone.findOneAndReplace({'itemName': req.params.zone},{'itemFriends':req.body.itemFriends})
+        .exec()
+        .then(doc => {
+            if (doc){
+                res.status(200).json(doc);
+            } else{
+                res.status(404).json({message: 'No valid entry found'});
+            }
+        })
+        .catch(err => {
+            res.status(500).json({error: err});
+        });
+});
+
+
+//---------------- DELETE
 router.delete('/name/:name', (req,res,next) => {
 
     Zone.findOneAndDelete({'itemName': req.params.name})
@@ -71,7 +89,7 @@ router.delete('/name/:name', (req,res,next) => {
                 error: err
             });
         });
-})
+});
 
 
 module.exports = router;
