@@ -14,5 +14,5 @@ const AmigoSchema = mongoose.Schema({
         match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9!](?:[a-z0-9-]*[a-z09])?\.)+[a-z0-9](?:[a-z0-9]*[a-z0-9])?/}
 });
 
-module.exports = mongoose.model('Amigo',AmigoSchema);
+module.exports = mongoose.model('amigos',AmigoSchema);
 

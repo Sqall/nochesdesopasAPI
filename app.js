@@ -12,7 +12,7 @@ const clothRoutes = require('./api/routes/clothes');
 const foodRoutes = require('./api/routes/foods');
 const transitRoutes = require('./api/routes/intransit');
 const zoneRoutes = require('./api/routes/zones');
-const endpointsRoutes = require('./api/routes/endpoints');
+const amigosRoutes = require('./api/routes/amigos');
 let paths = new Array();
 
 // mongoose.connect('mongodb://jacksun:Fullmetala06!@cluster0-shard-00-00-qb15r.gcp.mongodb.net:27017,cluster0-shard-00-01-qb15r.gcp.mongodb.net:27017,cluster0-shard-00-02-qb15r.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',{useNewUrlParser: true})
@@ -45,6 +45,7 @@ app.use('/heroes',heroesRoutes);
 app.use('/user',userRoutes);
 app.use('/intransit',transitRoutes);
 app.use('/zone',zoneRoutes);
+app.use('/amigos',amigosRoutes);
 app.use('/endpoints',function(req,res,next){
   if (paths.length == 0){
     app._router.stack.forEach((layer) => {
