@@ -6,7 +6,8 @@ const AmigoSchema = mongoose.Schema({
 		index:true
 	},
 	name: String,
-    notes: [String],
+    notes: [{fecha: Date, text: String}],    
+    team: Number,
     email: {
         type: String,
         required: true,
