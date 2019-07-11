@@ -21,7 +21,22 @@ router.get('/',(req,res,next) => {
 });
 
 router.get('/names',(req,res,next) => {
-    Zone.find({},{itemName:1})
+    Zone.find({},{itemName:1,_id:0})
+        .exec()
+        .then(doc => {
+            if (doc){
+                res.status(200).json(doc);
+            } else{
+                res.status(404).json({message: 'No valid entry found'});
+            }
+        })
+        .catch(err => {
+            res.status(500).json({error: err});
+        });
+});
+
+router.get('/:name',(req,res,next) => {
+    Zone.find({itemName: req.params.name})
         .exec()
         .then(doc => {
             if (doc){
@@ -40,15 +55,32 @@ router.get('/names',(req,res,next) => {
 router.post('/',(req,res,next) => {
 
     const newZone = new Zone({
+        id: "1",
         itemName: req.body.itemName,
-        itemFriends: JSON.parse(req.body.itemFriends)
+        itemFriends: req.body.itemFriends || [],
+        itemTeam: req.body.itemTeam
     });
 
     newZone.save()
         .then(result => {
             res.status(200).json({
-                message:'Zone Created',
-                createdCloth: result//CAN CREATE NEW OBJECT TO RETURN
+                message:'Zona Creada',
+                createdZone: result//CAN CREATE NEW OBJECT TO RETURN
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+router.post('/amigo', (req,res,next) => {
+    Zone.update({itemName: req.body.zone},{$push:{itemFriends: req.body.friend}})
+        .then(result => {
+            res.status(200).json({
+                message: 'Amigo agregado',
+                addedFriend: result
             });
         })
         .catch(err => {
