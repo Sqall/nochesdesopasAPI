@@ -5,11 +5,11 @@ const ZoneSchema = mongoose.Schema({
 		type: Number,
 		index:true
 	},
+	itemTeam:Number,
 	itemName: String,
 	itemFriends: [
 		{
-			name:String,
-			team:Number,
+			name:String
 		}
 	]
 });
