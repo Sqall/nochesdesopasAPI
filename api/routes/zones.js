@@ -76,7 +76,7 @@ router.post('/',(req,res,next) => {
 });
 
 router.post('/amigo', (req,res,next) => {
-    Zone.update({itemName: req.body.zone},{$push:{itemFriends: req.body.friend}})
+    Zone.update({itemName: req.body.zone},{$push:{itemFriends: {name:req.body.friend}}})
         .then(result => {
             res.status(200).json({
                 message: 'Amigo agregado',
