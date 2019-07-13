@@ -10,7 +10,8 @@ const ClothSchema = mongoose.Schema({
 	itemQuantity: Number,
 	itemMax: Number,
 	itemMin: Number,
-	itemGender: String
+	itemGender: String,
+	itemDonacion: Number
 });
 
 module.exports = mongoose.model('Cloth',ClothSchema);

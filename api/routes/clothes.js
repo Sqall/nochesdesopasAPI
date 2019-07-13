@@ -173,13 +173,14 @@ router.post('/',(req,res,next) => {
 		itemQuantity: req.body.itemQuantity,
 		itemMax: req.body.itemMax,
 		itemMin: req.body.itemMin,
-		itemGender: req.body.itemGender
+        itemGender: req.body.itemGender,
+        itemDonacion: req.body.itemDonacion
     });
 
     newCloth.save()
         .then(result => {
             res.status(200).json({
-                message:'Cloth Created',
+                message:'Ropa Created',
                 createdCloth: result//CAN CREATE NEW OBJECT TO RETURN
             });
         })
@@ -200,6 +201,7 @@ router.put('/id/:id',(req,res,next) => {
     const newitemMax = req.body.itemMax;
     const newitemMin = req.body.itemMin;
     const newitemGender = req.body.itemGender;
+    const newitemDonacion = req.body.itemDonacion;
 
     Cloth.findOneAndUpdate({'_id':req.params.id},{$set: {
             itemName: newitemName,
@@ -207,7 +209,8 @@ router.put('/id/:id',(req,res,next) => {
             itemQuantity: newitemQuantity,
             itemMax: newitemMax,
             itemMin: newitemMin,
-            itemGender: newitemGender
+            itemGender: newitemGender,
+            itemDonacion: newitemDonacion
         }})
         .exec()
         .then(doc => {

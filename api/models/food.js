@@ -9,7 +9,8 @@ var FoodSchema = mongoose.Schema({
 	itemSize: Number,
 	itemQuantity: Number,	
 	itemMax: Number,
-	itemMin: Number
+	itemMin: Number,
+	itemDonacion: Number
 });
 
 module.exports = mongoose.model('Food',FoodSchema);

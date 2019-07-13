@@ -150,14 +150,14 @@ router.get('/byMoreThan/:nro',(req,res,next) => {
 
 //--------------POST
 router.post('/',(req,res,next) => {
-    console.log(req.body);
-    
+
     const food = new Food({
         itemName: req.body.itemName,
         itemSize: req.body.itemSize,
         itemQuantity: req.body.itemQuantity,	
         itemMax: req.body.itemMax,
-        itemMin: req.body.itemMin
+        itemMin: req.body.itemMin,
+        itemDonacion: req.body.itemDonacion || 0
     });
 
     food.save()
@@ -183,13 +183,15 @@ router.put('/id/:id',(req,res,next) => {
     const newitemQuantity = req.body.itemQuantity;
     const newitemMax = req.body.itemMax;
     const newitemMin = req.body.itemMin;
+    const newitemDonacion = req.body.itemDonacion;
 
     Food.findOneAndUpdate({'_id':req.params.id},{$set: {
             itemName: newitemName,
             itemSize: newitemSize,
             itemQuantity: newitemQuantity,
             itemMax: newitemMax,
-            itemMin: newitemMin
+            itemMin: newitemMin,
+            itemDonacion: newitemDonacion
         }})
         .exec()
         .then(doc => {
@@ -206,6 +208,8 @@ router.put('/id/:id',(req,res,next) => {
             res.status(500).json({error:err});
         });
 });
+
+//----------------------DELETE
 
 router.delete('/id/:id', (req,res,next) => {
     Food.findOneAndDelete({'_id': req.params.id})
