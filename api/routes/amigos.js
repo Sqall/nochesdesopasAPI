@@ -20,7 +20,7 @@ router.get('/',(req,res,next) => {
 });
 
 router.get('/byId/:id',(req,res,next) => {
-    Amigo.find({'id':req.params.id})
+    Amigo.find({'_id':req.params.id})
         .exec()
         .then(doc => {
             if (doc){
