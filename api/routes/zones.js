@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const isLogged = require('../middleware/check-auth');
 
 
 const Zone = require('../models/zone');
@@ -52,7 +53,7 @@ router.get('/:name',(req,res,next) => {
 
 // ---------------- POSTS
 
-router.post('/',(req,res,next) => {
+router.post('/',isLogged,(req,res,next) => {
 
     const newZone = new Zone({
         id: "1",
@@ -75,7 +76,7 @@ router.post('/',(req,res,next) => {
         });
 });
 
-router.post('/amigo', (req,res,next) => {
+router.post('/amigo', isLogged, (req,res,next) => {
     Zone.update({itemName: req.body.zone},{$push:{itemFriends: {name:req.body.friend}}})
         .then(result => {
             res.status(200).json({
@@ -91,7 +92,7 @@ router.post('/amigo', (req,res,next) => {
 });
 
 // ---------------- MODIFY
-router.put('/:zone', (req,res,next) => {
+router.put('/:zone', isLogged, (req,res,next) => {
     Zone.findOneAndReplace({'itemName': req.params.zone},{'itemFriends':req.body.itemFriends})
         .exec()
         .then(doc => {
@@ -108,7 +109,7 @@ router.put('/:zone', (req,res,next) => {
 
 
 //---------------- DELETE
-router.delete('/name/:name', (req,res,next) => {
+router.delete('/name/:name', isLogged, (req,res,next) => {
 
     Zone.findOneAndDelete({'itemName': req.params.name})
         .then(result => {

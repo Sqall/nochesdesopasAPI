@@ -23,7 +23,7 @@ router.get('/',(req,res,next) => {
 });
 
 router.get('/byId/:id',(req,res,next) => {
-    Food.find({'_id':req.params.id})
+    Food.findOne({'_id':req.params.id})
         .exec()
         .then(doc => {
             if (doc){

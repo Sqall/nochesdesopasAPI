@@ -12,7 +12,7 @@
     "restful",
     "api"
   ],
-  "author": "Maximilian Schwarzmüller",
+  "author": "Nahuel Fabian Flores Medrano",
   "license": "ISC",
   "dependencies": {
     "@panva/jose": "^1.4.0",

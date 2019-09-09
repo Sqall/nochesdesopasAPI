@@ -4,13 +4,14 @@ module.exports = (req,res,next) => {
     try{
         //token comes in like "Bearer Xq2$..."
         //In header "Authorization"
-        const token = req.headers.authorization.split(" ")[1];
-        const decoded = jwt.verify(token,process.env.JTW_KEY);
+        const token = req.body.authorization;
+        // HACER ARCHIVO .env PARA TOMAR VALORES DE AHI, O HACER QUE EL USUARIO TENGA SU CLAVE SECRETA
+        const decoded = jwt.verify(token,"secret");
         req.userData = decoded;
         next();
     } catch(error){
         return res.status(401).json({
-            message: 'Auth failed'
+            message: error
         })
     }
 };
