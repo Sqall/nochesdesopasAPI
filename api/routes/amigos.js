@@ -19,8 +19,35 @@ router.get('/',(req,res,next) => {
         });
 });
 
+router.get('/primary/:id', (req,res,next)=> {
+    Amigo.findById({'_id' : req.params.id})
+        .select({name:1,age:1,location:1,ds_1:1})
+        .exec()
+        .then(doc =>{
+            if (doc) {
+                res.status(200).json(doc);
+            } else {
+                res.status(404).json({message: 'No se encuentra el amigo con ese ID'});
+            }
+        });
+});
+
+router.get('/secondary/:id', (req,res,next)=> {
+    Amigo.findById({'_id' : req.params.id})
+        //.select({ds_2:1,dni:1,d_fam:1,t_st:1,d_work:1,d_gob:1,d_health:1,d_hostel:1,formalities:1,d_sizes:1,search:1,d_work:1,d_work:1})
+        .select({name:0,age:0,location:0,ds_1:0})
+        .exec()
+        .then(doc =>{
+            if (doc) {
+                res.status(200).json(doc);
+            } else {
+                res.status(404).json({message: 'No se encuentra el amigo con ese ID'});
+            }
+        });
+});
+
 router.get('/byId/:id',(req,res,next) => {
-    Amigo.find({'_id':req.params.id})
+    Amigo.findById({'_id':req.params.id})
         .exec()
         .then(doc => {
             if (doc){
@@ -65,36 +92,35 @@ router.get('/byEmail/:email',(req,res,next) => {
         });
 });
 
-router.get('/byEquipo/:team',(req,res,next) => {
-    Amigo.find({'team':req.params.team})
-        .exec()
-        .then(doc => {
-            if (doc){
-                res.status(200).json(doc);
-            } else{
-                res.status(404).json({message: 'No se encuentran amigos en ese equipo'});
-            }
-        })
-        .catch(err => {
-            res.status(500).json({error:err});
-        });
-});
-
 ///-----------------------POST
 
 router.post('/',(req,res,next) => {
     
-    var today = new Date();
+    /*var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date+' '+time;
+    var dateTime = date+' '+time;*/
     
     const newAmigo = new Amigo({
-        id: req.body.id,
-		name: req.body.name,
-        notes: {date:dateTime, text: req.body.note},
-		team: req.body.team,
-		eamil: req.body.email
+        name: req.body.name || 'Sin Nombre',
+        surname: req.body.surname || 'Sin Apellido',
+        age: req.body.age || 0,
+        location: req.body.location || 'Sin ubicacion',
+        ds_1: req.body.ds_1 || 'Sin situacion',
+        ds_2: req.body.ds_2 || 'Sin conocimiento de su situacion',
+        dni: req.body.dni || 00000000,
+        d_fam: req.body.d_fam || 'Sin datos de familia',
+        t_st: req.body.t_st || 'Sin tiempo en calle',
+        d_work: req.body.d_work || 'Sin trabajo',
+        d_gob: req.body.d_gob || 'Sin ayuda del gobierno',
+        d_health: req.body.d_health || 'Sin datos de salud',
+        d_hostel: req.body.d_hostel || 'Sin datos de estadia',
+        formalities: req.body.formalities || [],
+        d_sizes: req.body.d_sizes || [],
+        search: req.body.search || [],
+        email: req.body.email || 'Sin Email',
+        notes: req.body.notes || [],
+        team: req.body.team || 0
     });
 
     newAmigo.save()
