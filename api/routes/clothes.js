@@ -191,6 +191,8 @@ router.post('/',(req,res,next) => {
         });
 });
 
+router
+
 //---------------- UPDATE
 
 router.put('/id/:id',(req,res,next) => {
