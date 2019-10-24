@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 router.post('/signup', (req,res,next) => {
-    User.find({email: req.body.email})
+    User.findOne({email: req.body.email})
         .exec()
         .then(user => {
             //user no es null, es arreglo vacio, se pregunta por lenght
