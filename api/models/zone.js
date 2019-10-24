@@ -5,7 +5,7 @@ const ZoneSchema = mongoose.Schema({
 		type: Number,
 		index:true
 	},
-	itemTeam:Number,
+	itemTeam: Number,
 	itemName: String,
 	itemFriends: [
 		{
