@@ -15,7 +15,7 @@
   "author": "Nahuel Fabian Flores Medrano",
   "license": "ISC",
   "devDependencies": {
-    "lodash": ">=4.17.19"
+    "lodash": ">=4.17.21"
   },
   "dependencies": {
     "@panva/jose": "^1.9.2",
